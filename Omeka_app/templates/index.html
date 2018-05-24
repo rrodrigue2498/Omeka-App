@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title> </title>
-</head>
 
-</Body>
+<body>
 
-Hello
+<h2> Digital Scholarship <em>Omeka App</em></h2>
+
+
+
+
+
+{% load i18n %}
+<form action="" method = "post">
+	{% csrf_token %}
+	<b>this is the form --</b>
+	{{ form }}
+	{{ search_form }}
+<input type="submit" value="{% trans 'Submit' %}" />
 
 </body>
-
-
 </html>

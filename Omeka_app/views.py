@@ -121,13 +121,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 from django.shortcuts import render
-from Omeka_app.forms import rsvpForm
+from Omeka_app.forms import rsvpForm, SearchForm
 from Omeka_app.models import *
 
 # Create your views here.
 def index(request):
 	if request.method == 'POST':
 		form = rsvpForm(request.POST)
+		print(form)
 		if form.is_valid():
 			name = request.POST.get('name', None)
 			email = request.POST.get('email', None)
@@ -138,14 +139,17 @@ def index(request):
                             note = note,
                             )
 			message = 'Thank you, see you in Boston'
+			print(message)
 			return render(request, 'index.html', { 'message':message })
 
 	else:
 		form = rsvpForm()
-		return render(request, 'index.html', { 'form':form })
-		
-def index(request):
-	return render(request, 'index.html')
+		print(form)
+		search_form = SearchForm()
+		return render(request, 'index.html', { 'form':form, 'search_form':search_form })
+	
+#def index(request):
+#	return render(request, 'index.html')	
 
 def items(request):
     items = item.objects.all()
